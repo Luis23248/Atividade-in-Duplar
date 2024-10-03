@@ -14,7 +14,8 @@ def engenheiro_valido():
                       "17375890", "1337", Setor.ENGENHARIA.nome, 5800, "crea")
 
 
-def test_validar_id(engenheiro_valido):
+
+def test_validar_id(engenheiro_valido: Engenheiro):
     assert engenheiro_valido.id == 1234
 
 def test_validar_nome(engenheiro_valido):
@@ -246,13 +247,27 @@ def test_cep_vazio():
 
 def test_cidade_vazia():
     with pytest.raises(TypeError, match="A cidade não deve estar vazia."):
-          Endereco("Rua I","3","Casa", "78541-333", "", UnidadeFederativa.SAO_PAULO.nome)
+        Endereco("Rua I","3","Casa", "78541-333", "", UnidadeFederativa.SAO_PAULO.nome)
 
 
 def test_cidade_tipo_invalido():
-    with pytest.raises(TypeError, match="A cidade deve ser um texto."):
-            Endereco("Rua I","3","Casa", "78541-333", 9090, UnidadeFederativa.SAO_PAULO.nome)
+    with pytest.raises(TypeError, match="A cidade deve ser um texto."):''
+    Endereco("Rua I","3","Casa", "78541-333", 9090, UnidadeFederativa.SAO_PAULO.nome)
 
 def test_complemento_tipo_invalido():
     with pytest.raises(TypeError, match="O complemento deve ser um texto."):
-         Endereco("Rua I","3",1234, "78541-333", "São Paulo", UnidadeFederativa.SAO_PAULO.nome)    
+        Endereco("Rua I","3",1234, "78541-333", "São Paulo", UnidadeFederativa.SAO_PAULO.nome)    
+
+
+
+
+
+
+
+def test_validar_crea_tipo_invalido():
+        with pytest.raises(TypeError, match="O crea deve não deve estar vazio."):
+            Engenheiro(123, "Wagner", "71982345670", "wagner@gmail.com",
+                      Endereco("Drena", "93", 123, "43900-000", "Sâo Paulo", UnidadeFederativa.SAO_PAULO.nome), 
+                      Sexo.MASCULINO.nome, EstadoCivil.SOLTEIRO.nome, "05/06/2005", "12345678900", 
+                      "12435533", "4556", Setor.ENGENHARIA.nome, 2600, "")
+

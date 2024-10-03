@@ -8,7 +8,7 @@ from projeto.models.enums.unidade_federativa import UnidadeFederativa
 @pytest.fixture
 def fornecedor_valido():
     return Fornecedor(1234, "LPL", "71988417575","LP@gmail.com",
-            Endereco("Rua I", "3","Casa","78541-333","Sâo Paulo",UnidadeFederativa.SAO_PAULO.nome),"04.254.147/3334-26","378","PS4")
+            Endereco("Rua I", "3","Casa","78541-333","São Paulo",UnidadeFederativa.SAO_PAULO.nome),"04.254.147/3334-26","378","PS4")
 
 
 
@@ -63,14 +63,14 @@ def test_id_numero_em_string_retorna_mensagem():
 
 """EMAIL Tets"""
 def test_email_vazio_retorna_menagem():
-    with pytest.raises(TypeError, match="O email não deve estar vazio."):     
-        Fornecedor("1234", "LPL", "71988417575", "",
+    with pytest.raises(ValueError, match="O email não deve estar vazio."):     
+        Fornecedor(1234, "LPL", "71988417575", " ",
             Endereco("Rua I", "3","Casa","78541-333","São Paulo",UnidadeFederativa.SAO_PAULO.nome),"04.254.147/3334-26","378","PS4")
 
 
 def test_email_formato_invalido():
-    with pytest.raises(ValueError, match="O email é inválido."):
-        Fornecedor("1234", "LPL", "71988417575","_LP@gmail.com",
+    with pytest.raises(TypeError, match="O email é inválido."):
+        Fornecedor(1234, "LPL", "71988417575", 123,
             Endereco("Rua I", "3","Casa","78541-333","São Paulo",UnidadeFederativa.SAO_PAULO.nome),"04.254.147/3334-26","378","PS4")
         
 

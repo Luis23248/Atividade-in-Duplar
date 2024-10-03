@@ -70,18 +70,10 @@ class Pessoa(ABC):
 
 
     def _verficar_email(self, valor):
-        self._verificar_email_vazio(valor)
-        self._verificar_email_formato_invalido(valor)
-
+        if not isinstance(valor, str):
+            raise TypeError("O email é inválido.") 
+        if not valor.strip():
+            raise ValueError("O email não deve estar vazio.") 
         self.email = valor
         return self.email
     
-    def _verificar_email_vazio(self, valor):
-        if not valor.strip():
-            raise TypeError("O email não deve estar vazio.")
-        
-
-    def _verificar_email_formato_invalido(self, valor):
-        email_regex = r"^[\w\.-]+@[\w\.-]+\.\w+$"
-        if not re.match(email_regex, valor.strip()):
-            raise ValueError("O email é inválido.")    

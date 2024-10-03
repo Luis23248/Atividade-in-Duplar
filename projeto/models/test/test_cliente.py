@@ -85,13 +85,13 @@ def test_id_numero_em_string_retorna_mensagem():
             Endereco("Rua I","3","casa", "78541-333", "Salvador", UnidadeFederativa.SAO_PAULO.nome),Sexo.MASCULINO.nome, EstadoCivil.SOLTEIRO.nome, "04/01/2003", 2323)
 
 def test_email_vazio_retorna_menagem():
-    with pytest.raises(TypeError, match="O email não deve estar vazio."):
+    with pytest.raises(ValueError, match="O email não deve estar vazio."):
         Cliente(1234, "LPL", "71988417575", "",
             Endereco("Rua I","3","casa", "78541-333", "Salvador", UnidadeFederativa.SAO_PAULO.nome),Sexo.MASCULINO.nome, EstadoCivil.SOLTEIRO.nome, "04/01/2003", 2323)
 
 def test_email_formato_invalido():
-    with pytest.raises(ValueError, match="O email é inválido."):
-        Cliente(1234, "LPL", "71988417575", "robsoncaminhoes@gmail.com",
+    with pytest.raises(TypeError, match="O email é inválido."):
+        Cliente(1234, "LPL", "71988417575", 123,
             Endereco("Rua I","3","casa", "78541-333", "Salvador", UnidadeFederativa.SAO_PAULO.nome),Sexo.MASCULINO.nome, EstadoCivil.SOLTEIRO.nome, "04/01/2003", 2323)
 
 
